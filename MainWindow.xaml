@@ -1,0 +1,156 @@
+﻿<Window x:Class="Skirmish_Builder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Skirmish_Builder"
+        mc:Ignorable="d"
+        Title="Skirmish Builder 1.0" WindowState="Maximized" MinWidth="940" MinHeight="500">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="900" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" >
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type TextBlock}" x:Key="Headers">
+                        <Setter Property="FontSize" Value="15" />
+                        <Setter Property="Padding" Value="10" />
+                    </Style>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}" x:Key="AllianceButtonTemplate">
+                        <Border    Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
+                                   BorderBrush="Black" BorderThickness="1" Background="White"
+                                   x:Name="MyBorder" Padding="3">
+                            <ContentPresenter x:Name="MyContentPresenter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="MyBorder" Property="Background" Value="Black"/>
+                                <Setter TargetName="MyContentPresenter" Property="TextBlock.Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="MyBorder" Property="Background" Value="White"/>
+                                <Setter TargetName="MyContentPresenter" Property="TextBlock.Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}" x:Key="YellowButtonTemplate">
+                        <Border    Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
+                                   BorderThickness="0" Background="Yellow"
+                                   x:Name="MyYellowBorder" Padding="7">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="MyYellowBorder" Property="Background" Value="#FFD19A03"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="MyYellowBorder" Property="Background" Value="#FFEEC300"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </StackPanel.Resources>
+                <TextBlock TextAlignment="Center" Padding="15">
+                    This is a Skirmish Warband builder
+                </TextBlock>
+                <Image Source="Logo.png" Height="100" HorizontalAlignment="Center" />
+                <Button x:Name="PDFButton" Width="150" HorizontalAlignment="Right" Click="PDFButton_Click" Content="Save to PDF">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border    Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
+                                   BorderThickness="0" Background="#FFEEC300"
+                                   x:Name="MyYellowBorder" Padding="7">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Button.IsPressed" Value="True">
+                                    <Setter TargetName="MyYellowBorder" Property="Background" Value="#FFD19A03"/>
+                                </Trigger>
+                                <Trigger Property="Button.IsPressed" Value="False">
+                                    <Setter TargetName="MyYellowBorder" Property="Background" Value="#FFEEC300"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <StackPanel Background="#FFF5F5F5" Margin="0,10,0,10">
+                    <DockPanel Margin="10">
+                        <TextBlock x:Name="CostBlock"  Text="Something went wrong" DockPanel.Dock="Right" VerticalAlignment="Center" />
+                        <TextBlock Style="{StaticResource Headers}" FontSize="12" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                            Your warband cost :
+                        </TextBlock>
+                        <TextBox x:Name="WarbandNameTextBox" DockPanel.Dock="Left" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15">
+                            Your Warband Name
+                        </TextBox>
+                </DockPanel>
+                <TextBlock Style="{StaticResource Headers}">
+                    <Bold>Choose a Grand Alliance</Bold>
+                </TextBlock>
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton x:Name="ChaosButton" Click="ChaosButton_Checked" Template="{StaticResource AllianceButtonTemplate}">Chaos</ToggleButton>
+                    <ToggleButton x:Name="OrderButton" Grid.Column="1" VerticalAlignment="Top" Click="OrderButton_Checked" Padding="3" Template="{StaticResource AllianceButtonTemplate}">Order</ToggleButton>
+                    <ToggleButton x:Name="DestructionButton" Grid.Column="2" Click="DestructionButton_Checked" Padding="3" Template="{StaticResource AllianceButtonTemplate}">Destruction</ToggleButton>
+                    <ToggleButton x:Name="DeathButton" Grid.Column="3" Click="DeathButton_Checked" Padding="3" Template="{StaticResource AllianceButtonTemplate}">Death</ToggleButton>
+                </Grid>
+                <TextBlock Style="{StaticResource Headers}">
+                    <Bold>Choose a Faction</Bold>
+                </TextBlock>
+                <ToggleButton x:Name="Choose" HorizontalAlignment="Left" Template="{StaticResource YellowButtonTemplate}" Margin="10">Select Faction</ToggleButton>
+                <Popup x:Name="FPopup" IsOpen="{Binding IsChecked, ElementName=Choose}" Placement="Bottom" PlacementTarget="{Binding ElementName=Choose}">
+                    <ListBox x:Name="ListOfFactions" ItemsSource="{Binding Path=Item[0]}" 
+                             Width="200" MaxHeight="195"
+                             DisplayMemberPath="name" HorizontalAlignment="Left"
+                             FontSize="14"
+                             SelectedItem="{Binding Path=Item[0].SelectedContent, Mode=TwoWay}"/>
+                </Popup>
+                </StackPanel>
+                <!-- HEROES -->
+                <StackPanel Background="#FFF5F5F5" Margin="0,10,0,10">
+                    <Grid Margin="0,5,0,5">
+                        <TextBlock Style="{StaticResource Headers}" Width="500" HorizontalAlignment="Left">
+                            <Bold>Heroes</Bold>
+                        </TextBlock>
+                        <ToggleButton x:Name="AddHero" HorizontalAlignment="Right" Template="{StaticResource YellowButtonTemplate}" Height="30"  Checked="AddHeroButton_Click" Margin="0,0,10,0">Add Hero</ToggleButton>
+                        <Popup x:Name="HPopup" IsOpen="{Binding IsChecked, ElementName=AddHero}" Placement="Bottom" PlacementTarget="{Binding ElementName=AddHero}">
+                            <ListBox x:Name="ListOfHeroes" ItemsSource="{Binding Path=Item[1]}" 
+                                 MinWidth="200" MaxHeight="195"
+                                 DisplayMemberPath="name" HorizontalAlignment="Left"
+                                 FontSize="14"
+                                 SelectedValue="{Binding Path=Item[1].SelectedContent, Mode=TwoWay}"/>
+                        </Popup>
+                    </Grid>
+                    <StackPanel x:Name="HeroStackPanel" />
+                </StackPanel>
+                <!-- UNITS -->
+                <StackPanel Background="#FFF5F5F5" Margin="0,10,0,10">
+                    <Grid Margin="0,5,0,5">
+                        <TextBlock Style="{StaticResource Headers}" Width="500" HorizontalAlignment="Left">
+                       <Bold>Units</Bold>
+                        </TextBlock>
+                        <ToggleButton x:Name="AddUnit" HorizontalAlignment="Right" Template="{StaticResource YellowButtonTemplate}" Height="30" Checked="AddUnitButton_Click" Margin="0,0,10,0">Add Unit</ToggleButton>
+                        <Popup x:Name="UPopup" IsOpen="{Binding IsChecked, ElementName=AddUnit}" Placement="Bottom" PlacementTarget="{Binding ElementName=AddUnit}">
+                            <ListBox x:Name="ListOfUnits" ItemsSource="{Binding Path=Item[2]}" 
+                                 MinWidth="200" MaxHeight="195"
+                                 DisplayMemberPath="name" HorizontalAlignment="Left"
+                                 FontSize="14"
+                                 SelectedValue="{Binding Path=Item[2].SelectedContent, Mode=TwoWay}"/>
+                        </Popup>
+                    </Grid>
+                    <StackPanel x:Name="UnitStackPanel" />
+                </StackPanel>
+                <TextBlock x:Name="MyDebug" Margin="0,500,0,0">Copyright 2017 by Jan Janowski</TextBlock>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
