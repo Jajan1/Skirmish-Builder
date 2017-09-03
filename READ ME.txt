@@ -1,0 +1,17 @@
+[EN] ATTENTION!
+
+The Skirmish Builder works properly only while remaining in this folder after extracting from rar.
+Moving Skirmish_Builder.exe file from this folder will result in issues and crashes after pressing "Save to PDF" button.
+All the other features should work properly.
+
+Have you found an unknown issue? Contact me: janek.jajanowski@gmail.com
+Please write [Skirmish Builder] in the subject.
+
+[PL] UWAGA!
+
+Skirmish Builder dzia³a w pe³ni poprawnie tylko jeœli znajduje siê w dostarczonym folderze po rozpakowaniu z pliku rar.
+Przeniesienie pliku Skirmish_Builder.exe z tego folderu skutkowaæ bêdzie b³êdami i awariami programu po wciœniêciu przycisku "Save to PDF".
+Wszystkie pozosta³e funkcjonalnoœci powinny dzia³aæ poprawnie.
+
+Znalaz³eœ nieznany jeszcze b³¹d? Napisz do mnie: janek.jajanowski@gmail.com
+Rozpocznij temat od [Skirmish Builder].

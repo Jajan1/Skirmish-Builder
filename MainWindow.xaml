@@ -57,7 +57,6 @@
                 <TextBlock TextAlignment="Center" Padding="15">
                     This is a Skirmish Warband builder
                 </TextBlock>
-                <Image Source="Logo.png" Height="100" HorizontalAlignment="Center" />
                 <Button x:Name="PDFButton" Width="150" HorizontalAlignment="Right" Click="PDFButton_Click" Content="Save to PDF">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
